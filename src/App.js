@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 
+import Notification from './components/notification/notification.component'
 import HomePage from "./pages/homepage/homepage.component";
 import "./pages/homepage/homepage.styles.scss";
 import ShopPage from "./pages/shop/shop.component.jsx";
@@ -48,6 +49,7 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Header />
+          <Notification/>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
@@ -64,6 +66,7 @@ class App extends React.Component {
               }
             />
           </Switch>
+          
         </BrowserRouter>
       </div>
     );

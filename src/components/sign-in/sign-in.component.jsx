@@ -1,9 +1,11 @@
 import React from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component'
-
+import CustomButton from '../custom-button/custom-button.component';
+import {notificationAction} from '../../redux/notification/notification.reducer';
 import {auth, signInWithGoogle} from '../../firebase/firebase.utils';
+import { connect } from 'react-redux';
+
 
 class SignIn extends React.Component{
     constructor(props){
@@ -20,14 +22,16 @@ class SignIn extends React.Component{
     handleSubmit = async event =>{
         event.preventDefault();
 
+        const { notificationAction } = this.props;
         const{email,password}= this.state;
         
         try{
             await auth.signInWithEmailAndPassword(email, password);
             this.setState({email:'',password:''})
+            notificationAction('Sign In successfully',5000)
         }
         catch(error){
-            console.log(error)
+            notificationAction('Sign In Error',5000)
         }
         
     }
@@ -72,4 +76,9 @@ class SignIn extends React.Component{
     }
 }
 
-export default SignIn;
+const mapDispatchToProp = (dispatch) =>({
+    notificationAction : (message,time) => dispatch(notificationAction(message,time))
+})
+
+
+export default connect(null,mapDispatchToProp)(SignIn);

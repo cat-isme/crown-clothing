@@ -1,0 +1,12 @@
+.noti {
+    border: solid;
+    padding: 10px;
+    border-width: 1px;
+    font-size:18px;
+    width:300px;
+    color:white;
+    background-color:green;
+    position: fixed;
+    z-index:100;
+    right:10px;
+  }
